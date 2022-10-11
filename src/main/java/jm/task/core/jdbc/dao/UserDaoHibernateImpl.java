@@ -11,8 +11,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
 
     @Override
-    public void createUsersTable() {
+    public UserDaoJDBCImpl createUsersTable() {
 
+        return null;
     }
 
     @Override
