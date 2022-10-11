@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public UserDaoJDBCImpl createUsersTable() {
+    public void createUsersTable() {
         Util util = new Util();
         try {
             Statement statement = util.getConnection().createStatement();
@@ -32,8 +32,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 ;
             }
         }
-
-        return null;
     }
 
     public void dropUsersTable() {
