@@ -16,7 +16,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public UserDaoJDBCImpl createUsersTable() {
-        Util util  = new Util();
+        Util util = new Util();
         try {
             Statement statement = util.getConnection().createStatement();
             statement.execute("CREATE TABLE IF NOT EXISTS users(Id INTEGER PRIMARY KEY AUTO_INCREMENT, " +
@@ -24,11 +24,12 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException E) {
             System.out.println("Ошибка при создании новой таблицы! :(");
         }
-        if(util.getConnection() != null){
+        if (util.getConnection() != null) {
             try {
                 util.getConnection().close();
             } catch (SQLException e) {
-                System.out.println("Ошибка при закрытие соединения :(");;
+                System.out.println("Ошибка при закрытие соединения :(");
+                ;
             }
         }
 
@@ -36,72 +37,75 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        Util util  = new Util();
+        Util util = new Util();
         try {
             Statement statement = util.getConnection().createStatement();
             statement.execute("DROP TABLE IF  EXISTS users");
         } catch (SQLException E) {
             System.out.println("Ошибка при удалении таблицы! :(");
         }
-        if(util.getConnection() != null){
+        if (util.getConnection() != null) {
             try {
                 util.getConnection().close();
             } catch (SQLException e) {
-                System.out.println("Ошибка при закрытие соединения :(");;
+                System.out.println("Ошибка при закрытие соединения :(");
+                ;
             }
         }
 
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        Util util  = new Util();
+        Util util = new Util();
         try {
             PreparedStatement ps = util.getConnection().prepareStatement("INSERT INTO users(FirstName, Lastname, Age) " +
                     "VALUES (?,?,?)");
             ps.setString(1, name);
-            ps.setString(2,lastName);
-            ps.setInt(3,age);
+            ps.setString(2, lastName);
+            ps.setInt(3, age);
             ps.executeUpdate();
 
         } catch (SQLException E) {
             System.out.println("Ошибка при добавлении пользователя! :(");
         }
-        if(util.getConnection() != null){
+        if (util.getConnection() != null) {
             try {
                 util.getConnection().close();
             } catch (SQLException e) {
-                System.out.println("Ошибка при закрытие соединения :(");;
+                System.out.println("Ошибка при закрытие соединения :(");
+                ;
             }
         }
 
     }
 
     public void removeUserById(long id) {
-        Util util  = new Util();
+        Util util = new Util();
         try {
-            String sql = "DELETE FROM users WHERE Id = ' "+ id +" '";
+            String sql = "DELETE FROM users WHERE Id = ' " + id + " '";
             Statement statement = util.getConnection().createStatement();
             statement.executeUpdate(sql);
         } catch (SQLException E) {
             System.out.println("Ошибка при удалении пользователя по Id! :(");
         }
-        if(util.getConnection() != null){
+        if (util.getConnection() != null) {
             try {
                 util.getConnection().close();
             } catch (SQLException e) {
-                System.out.println("Ошибка при закрытие соединения :(");;
+                System.out.println("Ошибка при закрытие соединения :(");
+                ;
             }
         }
 
     }
 
     public List<User> getAllUsers() {
-        Util util  = new Util();
+        Util util = new Util();
         List<User> AllUsers = new ArrayList<>();
         try {
             Statement statement = util.getConnection().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM users");
-            while (rs.next()){
+            while (rs.next()) {
                 User user = new User();
                 user.setId((long) rs.getInt(1));
                 user.setName(rs.getString(2));
@@ -112,29 +116,31 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException E) {
             System.out.println("Ошибка при получении всех пользователей :(");
         }
-        if(util.getConnection() != null){
+        if (util.getConnection() != null) {
             try {
                 util.getConnection().close();
             } catch (SQLException e) {
-                System.out.println("Ошибка при закрытие соединения :(");;
+                System.out.println("Ошибка при закрытие соединения :(");
+                ;
             }
         }
         return AllUsers;
     }
 
     public void cleanUsersTable() {
-        Util util  = new Util();
+        Util util = new Util();
         try {
             Statement statement = util.getConnection().createStatement();
             statement.execute("TRUNCATE TABLE users");
         } catch (SQLException E) {
             System.out.println("Ошибка при удалении пользователя по Id! :(");
         }
-        if(util.getConnection() != null){
+        if (util.getConnection() != null) {
             try {
                 util.getConnection().close();
             } catch (SQLException e) {
-                System.out.println("Ошибка при закрытие соединения :(");;
+                System.out.println("Ошибка при закрытие соединения :(");
+                ;
             }
         }
     }
